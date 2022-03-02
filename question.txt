@@ -1,0 +1,163 @@
+event loop question
+design promise
+
+LRU
+PubSub
+
+var input = {
+  "a":{
+    "b":{
+      "c": []
+    },
+    "d": {}
+  },
+  "e": "e",
+  "f" : null,
+  "g" : -2
+}
+output: "a.b.c" => [], "a.g" => -2
+
+
+Atlassian:
+R1: design tree/folder structre in react or js
+R2: js question
+// returns the state of *all* features for current user
+function fetchAllFeatures() {
+// in reality, this would have been a `fetch` call:
+// `fetch("/api/features/all")`
+    return new Promise(resolve => {
+        const sampleFeatures = {
+            "extended-summary": true,
+            "feedback-dialog": false
+        };
+        setTimeout(resolve, 100, sampleFeatures);
+    });
+}
+
+// api error response 
+/***
+{
+    access: true/false,
+    data: {},
+    error: {
+        message: ""
+    }
+
+}
+
+**/
+
+const logic = async () => {
+    
+     
+     const allFeatures = await fetchAllFeatures();
+     console.log("only once");
+             
+     return allFeatures;
+
+
+//     return new Promise( (resolve, reject) => {
+//         resolve(cache[featureName] ? true: false);
+//     } )
+}
+
+
+function loadFeatureState(){
+    
+//     let loadFirstTime = true;
+    let cache;
+    return function(featureName){
+        if(!cache){
+            
+            return logic().then( (allFeatures) => {
+                cache = allFeatures;
+                return !!cache[featureName];
+            } );
+        } else {
+            return new Promise ( (resolve) => resolve(!!cache[featureName]) );
+        }
+        
+    }
+}
+
+const getFeatureState = loadFeatureState();
+
+getFeatureState("extended-summary")
+.then(function(isEnabled) {
+    console.log("res: ", isEnabled);
+});
+
+setTimeout( () => {
+    getFeatureState("extended-summary")
+    .then(function(isEnabled) {
+        console.log("res: ", isEnabled);
+    });
+}, 2000 );
+
+   // src/feature-x/summary.js
+// getFeatureState("extended-summary")
+// .then(function(isEnabled) {
+//     if (isEnabled) {
+//         showExtendedSummary();
+//     } else {
+//         showBriefSummary();
+//     }
+// });
+// // src/feature-y/feedback-dialog.js
+// getFeatureState("feedback-dialog")
+// .then(function(isEnabled) {
+//     if (isEnabled) {
+//         makeFeedbackButtonVisible();
+//     }
+// });
+
+
+
+R3: jira desgin
+
+
+bfs/dfs
+
+snake game
+
+debounce, throttle, bind, reduce polyfill
+
+deepcopy
+
+web optimisation
+
+react hooks, HOC, useCallback usecase, memoization techniques
+
+type ahead widget implementation
+
+HTML editor designing
+
+celebrity problem (rare question)
+
+// Given a string containing of '0', '1' and '?' wildcard characters, generate all binary strings that can be formed by replacing each wildcard character by '0' or '1'.
+// Example :
+// Input str = "1??0?101" -> 2^n
+// Output: 
+//         10000101
+//         10001101
+//         10100101
+//         10101101
+//         11000101
+//         11001101
+//         11100101
+//         11101101
+
+
+// anagram
+
+// taman , namat -> sort -> aamnt, aamnt
+
+// {} 
+
+
+// Create a data structure twoStacks that represents two stacks. Implementation of twoStacks should use only one array of size n, i.e., both stacks should use the same array for storing elements. Following functions must be supported by twoStacks.
+// push1(int x) –> pushes x to first stack
+// push2(int x) –> pushes x to second stack
+// pop1() –> pops an element from first stack and return the popped element
+// pop2() –> pops an element from second stack and return the popped element
+// Implementation of twoStack should be space efficient.
