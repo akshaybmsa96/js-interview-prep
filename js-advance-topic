@@ -1,0 +1,49 @@
+1. System Design Questions
+2. Optimising page performance on Vanilla JS applications using techniques like Code Splitting, Using Async/Defer, Css Modules,Prefetch, PRPL pattern
+3. Machine Coding round - Expectations of interviewer/Best patterns to create applications in Vanilla JS
+4. DS/Algos - Most asked questions - Trees/LinkedLists/Arrays
+
+Some system design questions that I have faced :
+1. To create a web application like flipkart, amazon
+2. Uber - System design for Cab Search near you
+3. How does NPM work internally ? e.g. npm install
+
+Polyfills for Debounce,Throttle,Promise, Object.create.
+
+
+Machine coding topics/ vanilla js
+
+1. comment section widget
+    a) reply feature
+    b) nested comments to n-level
+    c) delete comment
+    d) edit comment
+    e) like the comment?
+
+2. to-do list app
+    a) todo, working, finished section
+    b) add/edit/delete tasks
+    c) drag and drop to sections
+    d) re-arrange sections
+    e) sort tasks
+
+3. food ordering app
+    a) fetch data from api to get list of outlets(name, image, des, rating, menu, eta etc)
+    b) responsiveness should be there
+    c) search functionality
+    d) filter/sort a/c to tag, eta rating, etc
+    e) debouncing if you have time
+
+4. email web app like outlook
+    a) create your own data format
+    b) inbox, send, favourite and other navigation
+    c) list on mails in particular section
+    d) with read/unread flag - local storage
+    e) should open once you click and maintain the read/unread mail count.
+    f) delete/ star marked email
+
+5. sudoku game
+6. chess game
+7. snake and ladder
+8. comparision app (products, github profile etc)
+9. snake xenxia 
