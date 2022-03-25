@@ -1,0 +1,605 @@
+ECMA stands for European Computer Manufacturers Association
+closures -- actual definition ---> {}  done(combination of functions bundled together with ref to its surrounding states)
+
+closure advantage, disadvantage
+
+call: method calls a function with a given this value and arguments provided individually.
+apply: same as call but params will be passed as array
+bind: method creates a new function that, when called, has its this keyword set to the provided value,
+      with a given sequence of arguments preceding any provided when the new function is called.
+
+transpiling(babel): taking source code written in one language and transforming into another language that has a similar level of abstraction,
+
+polyfills : custom codes to replicate an existing functionality which is might be missing somewhere(other version of browser)
+
+use strict(Defines that JavaScript code should be executed in "strict mode"),
+  eg, cannot decalre global variable
+      deleteing objects and value are not allowed
+      this will undefined in strict mode(in normal mode it is a window object)
+
+hoisting (Hoisting is a JavaScript mechanism where variables and function declarations are moved to the top of their scope before code execution),
+lexical scoping => things declared outside accessible  inside also,
+functional scoping,
+function and object(constructor syntax and literal syntax),
+function currying, infinite function currying;
+chaining in js,
+
+    object functions :
+    1.The Object.assign() method copies all enumerable own properties from one or more source objects to a target object. It returns the target object.
+    2.The Object.keys() method will return you the array of key values of array.
+    3.The Object.values() method will return you the array of key values of array.
+    4.The Object.create() method creates a new object, using an existing object as the prototype of the newly created object.
+          Q. difference b/w assign and create
+    5.The Object.entries() method returns an array of a given object's own enumerable string-keyed property [key, value] pairs,
+        eg Object.entries({a:1,b:2})
+        will return [['a',1],['b',2]]
+    6.The Object.fromEntries() method transforms a list of key-value pairs into an object.
+    7.The Object.freeze() method freezes an object. A frozen object can no longer be changed; freezing an object prevents new properties from being added to it, existing properties from being removed, prevents changing the enumerability, configurability, or writability of existing properties, and prevents the values of existing properties from being changed. In addition, freezing an object also prevents its prototype from being changed. freeze() returns the same object that was passed in.
+        makes object nonConfigurable
+        prevents adding
+        prevents deleting
+        prevents changing of key values
+        set writable property to false
+    8.The Object.preventExtensions() method prevents new properties from ever being added to an object (i.e. prevents future extensions to the object).
+        prevents adding
+    9.The Object.seal() method seals an object, preventing new properties from being added to it and marking all existing properties as non-configurable. Values of present properties can still be changed as long as they are writable.
+        prevents adding
+        prevents deleting
+        makes object nonConfigurable
+    10.The Object.is() method determines whether two values are the same value.
+        eg :  Object.is('foo', 'foo');     // true
+              Object.is(window, window);   // true
+
+              Object.is('foo', 'bar');     // false
+              Object.is([], []);           // false
+
+              var foo = { a: 1 };
+              var bar = { a: 1 };
+              Object.is(foo, foo);         // true
+              Object.is(foo, bar);         // false
+
+              Object.is(null, null);       // true
+
+              // Special Cases
+              Object.is(0, -0);            // false
+              Object.is(-0, -0);           // true
+              Object.is(NaN, 0/0);         // true
+
+              differnce b/w Object.is and ===
+
+              console.log(+0 === -0); //true
+              console.log(Object.is(+0, -0)); //false
+
+              console.log(NaN === NaN); // false
+              console.log(Object.is(NaN, NaN)); //true
+
+              console.log(Number.NaN === Number.NaN); // false
+              console.log(Object.is(Number.NaN, Number.NaN)); // true
+
+              console.log(NaN === Number.NaN); // false
+              console.log(Object.is(NaN, Number.NaN)); // true
+
+      11. The propertyIsEnumerable() method returns a Boolean indicating whether the specified property is enumerable and is the object's own property.
+          //alternate sol of hasOwnProperty
+
+IIFE  advantage,disadvantage,
+template literal,
+arrow function,
+spread operators/rest parameter,
+functional constructor,
+Prototype Prototypes are the mechanism by which JavaScript objects inherit features from one another
+ __proto__, describes the parent behaviour or what it is exactly made up of
+ There are only two limitations:
+    The references can’t go in circles. JavaScript will throw an error if we try to assign __proto__ in a circle.
+    The value of __proto__ can be either an object or null. Other types are ignored.
+    The inherited value is readOnly except accessors properties.
+
+let clone = Object.create(Object.getPrototypeOf(obj), Object.getOwnPropertyDescriptors(obj));
+// to make clone including non enumerables
+
+data descriptor, accessor discriptor(tells the property behaviour)
+  enumerable,writable,configurable,value,get,set
+
+garbage collector -> works on reachability of object/var,{
+  Generational collection,Incremental collection,Idle-time collection
+}
+
+
+array functions :
+1. sort You need to return 0 if the two elements are equal,
+    a negative number if A should be before B and a positive number
+    if B should be before A.
+2. The Array.from() static method creates a new, shallow-copied Array instance
+    from an array-like or iterable object.
+
+    eg Array.from([1,2,3],function(x){return x+x}) => [2,4,6]
+       Array.from('foo'.split('')) => ['f','o','o']
+
+3. The splice() method changes the contents of an array by removing or
+    replacing existing elements and/or adding new elements in place.
+
+    eg array.splice(start(startIndex), deleteCount(no of items to delete),
+                      item1,item2,...(items to insert after deleting))
+
+4. The slice() method returns a shallow copy of a portion of an array into a
+   new array object selected from start to end (end not included) where start
+   and end represent the index of items in that array.
+   The original array will not be modified.
+
+   eg array.slice(start, end)
+
+5. Array.find : returns first element with matched condition
+6. Array.findIndex : returns index of first element with matched condition
+7. Array.Every : return true if condition is satisfied on every single value else false
+8. Array.Some : return true if condition is satisfied on any single value. else false
+9. Array.Flat : flatters your array.
+                eg [['a','b'],1,2,[4,5]].flat();
+                   => ["a", "b", 1, 2, 4, 5]
+
+10. Array.isArray() method determines whether the passed value is an Array.
+                eg Array.isArray([1, 2, 3]);  // true
+                   Array.isArray({foo: 123}); // false
+                   Array.isArray('foobar');   // false
+                   Array.isArray(undefined);  // false
+
+11. The Array.of() method creates a new Array instance from a variable number of arguments,
+    regardless of number or type of the arguments.
+                eg  Array.of(7);       // [7]
+                    Array.of(1, 2, 3); // [1, 2, 3]
+
+                    Array(7);          // array of 7 empty slots
+                    Array(1, 2, 3);    // [1, 2, 3]
+12. The concat() method is used to merge two or more arrays. This method does not change the existing arrays,
+    but instead returns a new array.
+                eg  const array1 = ['a', 'b', 'c'];
+                    const array2 = ['d', 'e', 'f'];
+                    const array3 = array1.concat(array2) // ['a','b','c','d', 'e', 'f']
+
+13. The fill() method changes all elements in an array to a static value, from a start index (default 0) to an end index
+    (default array.length). It returns the modified array.
+                eg const array1 = [1, 2, 3, 4];
+
+                    // fill with 0 from position 2 until position 4
+                    console.log(array1.fill(0, 2, 4));
+                    // expected output: [1, 2, 0, 0]
+
+                    // fill with 5 from position 1
+                    console.log(array1.fill(5, 1));
+                    // expected output: [1, 5, 5, 5]
+
+                    console.log(array1.fill(6));
+                    // expected output: [6, 6, 6, 6]
+14. The copyWithin() method shallow copies part of an array to another location in the same array and returns it without modifying its length.
+                eg const array1 = ['a', 'b', 'c', 'd', 'e'];
+
+                    // copy to index 0 the element at index 3
+                    console.log(array1.copyWithin(0, 3, 4));
+                    // expected output: Array ["d", "b", "c", "d", "e"]
+
+                    // copy to index 1 all elements from index 3 to the end
+                    console.log(array1.copyWithin(1, 3));
+                    // expected output: Array ["d", "d", "e", "d", "e"]
+
+15. The join() method creates and returns a new string by concatenating all of the elements in an array (or an array-like object),
+    separated by commas or a specified separator string. If the array has only one item, then that item will be returned without using the separator.
+                eg const elements = ['Fire', 'Air', 'Water'];
+
+                    console.log(elements.join());
+                    // expected output: "Fire,Air,Water"
+
+                    console.log(elements.join(''));
+                    // expected output: "FireAirWater"
+
+                    console.log(elements.join('-'));
+                    // expected output: "Fire-Air-Water"
+
+prototypal inheritance,
+classical inheritance,
+object.define property prototypical inheritance, isPrototypeOf
+for...in(works with object keys), for...of(works with iterables)
+class,
+async await (Q. Async await in for loop and forEach  //behaviour),
+promises,
+AbortController
+Symbols :- used to generate unique identifiers
+es6 modules{import export}
+debouncing,
+throatling,
+customEvents,
+Memoization : It is a programming technique which attempts to increase a function's performance by caching its previously computed results.,
+
+iterators and generators,
+  In JavaScript an iterator is an object which defines a sequence and potentially a return value upon its termination.
+    {value : '', done : false}
+  Generators are the special functions which are used to generate iterators or the sequence of values
+
+
+  promises.allSettled([promises]) will return
+  0: {status: "fulfilled", value: 1}
+  1: {status: "fulfilled", value: 2}   //array of objects
+  2: {status: "rejected", value: 3}
+
+  promise.all([promises]) will return
+      0: 1
+      1: 2     // array of resolved values
+      2: 3
+
+
+
+  promise.race([]) will return
+      first resolved promise
+
+  promise.any([]) will return
+      any resolved/rejected promise
+
+
+
+defer/async,
+eventloops,
+call stack
+task queue
+micro task queue
+execution context => an execution context is an abstract concept of an
+                      environment where the Javascript code is evaluated and
+                      executed. Whenever any code is run in JavaScript, it’s run inside
+                      an execution context.,
+
+                      There are three types of execution context in JavaScript.
+                      1. Global Execution Context — This is the default or base
+                                                    execution context. The code that is not inside any function is
+                                                    in the global execution context. It performs two things: it creates a
+                                                    global object which is a window object (in the case of browsers) and
+                                                    sets the value of this to equal to the global object. There can only be
+                                                    one global execution context in a program.
+
+                      2. Functional Execution Context — Every time a function is invoked, a brand new execution context is created
+                                                        for that function. Each function has its own execution context, but it’s
+                                                        created when the function is invoked or called. There can be any number of
+                                                        function execution contexts. Whenever a new execution context is created,
+                                                        it goes through a series of steps in a defined order
+
+                      3. Eval Function Execution Context -  Code executed inside an eval function also gets its own execution context
+
+
+HOF,First class functions
+mutables vs immutables
+data types from jsInfo
+  1. Premitives :
+        a. Strings
+        b. Numbers
+        c. null
+        d. undefined   //these all are immutable
+        e. NaN
+        f. Boolean
+        g. Symbols
+  2. Non-primitive (user defined)
+        a. Array      // these are mutable
+        b. Objects
+
+es6 features :
+  Default Parameters in ES6
+  Template Literals in ES6
+  Multi-line Strings in ES6
+  Destructuring Assignment in ES6
+  Enhanced Object Literals in ES6
+  Arrow Functions in ES6
+  Promises in ES6
+  Block-Scoped Constructs Let and Const
+  Classes in ES6
+  Modules in ES6
+  let,const
+
+es2020 features :
+  BigIt
+  Dynamic import
+  Nullish Coalescing
+  Optional Chaining
+  Promise.allSettled
+  String#matchAll
+  globalThis
+  Module Namespace Exports
+  Well defined for-in order
+  import.meta
+
+es2022 features :
+  1.private class members : 
+      class hello{
+        #title;  // hash tells private
+      }
+
+  2. at() Function for Indexing :
+    array= [1.2.4.5]
+    console.log(array[array.length-1]);
+    console.log(array.at(-1)); 
+
+  3. Scalable Object.prototype.hasOwnProperty()
+    const obj1={ hello:’Hi’}
+    let hasHello1=Object.prototype.hasOwnProperty.call(obj1, ‘hello’);
+    let hasHello= obj1.hasOwn(obj1, ‘hello’);
+    console.log(hasHello);
+    console.log(hasHello1); 
+
+
+Experimental JS
+
+
+axios vs fetch,
+        Fetch's body = Axios' data
+        Fetch's body has to be stringified, Axios' data contains the object
+        Fetch has no url in request object, Axios has url in request object
+        Fetch request function includes the url as parameter, Axios request function does not include the url as parameter.
+        Fetch request is ok when response object contains the ok property, Axios request is ok when status is 200 and statusText is 'OK'
+        To get the json object response: in fetch call the json() function on the response object, in Axios get data property of the response object.
+
+events, examples click, hover, scroll, keyup keydown, blur, focus
+custom events,
+event binding,
+event deligation :- refers to the process of using event propagation to handle events at a higher level in
+                    the DOM than the element on which the event originated. It allows us to attach a single
+                    event listener for elements that exist now or in the future.,
+bubbling and capturing,
+
+difference in decorators n prototypes,
+lambda function,
+thenable object
+lookup in js,
+
+cookies,
+local storage vs session storage and caching,
+
+web workers,
+service workers,
+Worklets,
+PWA,
+frontend optimisation :
+  1. Cleanup the html document
+  2. Minify CSS,JS and HTML,
+  3. Optimize images
+  4. compress your files
+  5. use CDN and caching etc
+  6. code splitting
+
+
+React :
+npm,npx,
+CRA,
+Route, Link, NavLink, Redirect, Prompt
+Proptype
+design patterns && react patterns,
+React memo
+React profiler
+React lazy
+React reconciler
+
+Flux : Flux is an architecture that Facebook uses internally when working with React.
+       It is not a framework or a library. It is simply a new kind of architecture that
+       complements React and the concept of Unidirectional Data Flow.
+
+       Flux is probably better explained by explaining its individual components :-
+
+        Actions - Helper methods that facilitate passing data to the Dispatcher
+        Dispatcher - Receives actions and broadcasts payloads to registered callbacks
+        Stores - Containers for application state & logic that have callbacks registered to the dispatcher
+        Controller Views - React Components that grab the state from Stores and pass it down via props to child components.
+
+
+jsx (syntax sugaring for React.createElement)
+repaint and reflow,
+types of component (stateful, stateless, functional, pure Components),
+lifecycle and methods ,latest lifecycle
+          old ones :
+                        constructor
+                    1. componentWillMount()
+                        render()
+                    2. componentDidMount(prevProps,prevState)
+                    3. componentWillRecieveProps(nextProps,nextState)
+                    4. shouldComponentUpdate(nextProps,nextState)
+                    5. componentWillUpdate(nextProps,nextState)
+                    6. componentDidUpdate(prevProps,prevState)
+                    7. componentWillUnmount()
+
+          new ones :
+                        constructor
+                    1. static getDerivedStateFromProps(nextprops, prevstate)
+                        render()
+                    2. componentDidMount(prevProps,prevState)
+                       static getDerivedStateFromProps()    //updating phase
+                    3. shouldComponentUpdate(nextProps,nextState)
+                    4. getSnapshotBeforeUpdate(prevProps, prevState)
+                    5. componentDidUpdate(prevProps,prevState)
+                    6. componentWillUnmount()
+
+
+          for error handling :
+                    1. static getDerivedStateFromError(error)
+                    2. componentDidCatch(error, info)
+
+
+                  static getDerivedStateFromError() {
+                     return { hasError: true };
+                   }
+
+                   componentDidCatch() {
+                     this.setState({ hasError: true });
+                   }
+
+
+real dom vs virtual dom,
+react portal,
+react hook
+            1. State Hook/ useState(initialValue) : let you define state even in your functional Component
+                eg : const [count(variable), setCount(it's setter)] = useState(0(initial value) ); // useState is a hook
+
+            2. Effect Hook/ useEffect(callback Function) : The Effect Hook, useEffect, adds the ability to perform side effects from a function component.
+                It serves the same purpose as componentDidMount, componentDidUpdate, and componentWillUnmount in React classes,
+                but unified into a single API.
+                eg : useEffect(() =>
+                                { // will be called every time component render
+                                      document.title = `You clicked ${count} times`;
+                                      },[count]); // Only re-run the effect if count changes
+
+
+            NOTE : Hooks don’t work inside classes.
+                   Hooks are JavaScript functions, but they impose two additional rules:
+                      1. Only call Hooks at the top level. Don’t call Hooks inside loops, conditions, or nested functions.
+`                     2. Only call Hooks from React function components. Don’t call Hooks from regular JavaScript functions
+
+            3. Context Hook/ useContext() :
+            4. Reducer Hook/ useReducer() :
+
+
+execution flow,
+error boundaries,
+immutability in react
+observables,
+HOC (connect in redux is a HOC)
+parameters of connect : connect(mapStateToProps,mapDispatchToProps,mergeProps,options)(Component)
+mapStateToProps : maps store values to component props
+mapDispatchToProps : map action dispatcher to component props,
+mergeProps : defines order of merging
+        eg mergeProps : (stateProps,dispatchProps,ownProps)=>{ return {...stateProps,...ownProps,...dispatchProps}}
+        byDefault order is : {...ownProps,...stateProps,...dispatcherProps}
+propsDrilling :- the way of passing the data down the hierarchy. which is a bad practice.
+react memo
+context api
+
+
+Redux :
+  workflow of Redux
+  connect is a HOC(point to remember)
+  difference b/w mobX and redux
+
+
+
+
+babel
+Refs
+webpack : It s a static module bundler for modern JavaScript applications.
+          When webpack processes your application, it internally builds a dependency graph
+          which maps every module your project needs and generates one or more bundles.
+
+          Core Concepts of webpack :
+
+          1.Entry : An entry point indicates which module webpack should use to begin building out its
+                    internal dependency graph. webpack will figure out which other modules and
+                    libraries that entry point depends on (directly and indirectly).
+                    eg.  module.exports = {
+                        entry: './path/to/my/entry/file.js'
+                      };
+
+          2.Output : It tells webpack where to emit the bundles it creates and how to name these files.
+                     It defaults to ./dist/main.js for the main output file and to the ./dist folder for
+                     any other generated file.
+                     eg. module.exports = {
+                          entry: './path/to/my/entry/file.js',
+                          output: {
+                            path: path.resolve(__dirname, 'dist'),
+                            filename: 'my-first-webpack.bundle.js'
+                          }
+                        };
+
+          3.Loaders : Out of the box, webpack only understands JavaScript and JSON files. Loaders allow webpack
+                      to process other types of files and convert them into valid modules that can be consumed by
+                      your application and added to the dependency graph.
+
+                      At a high level, loaders have two properties in your webpack configuration:
+                        a) The test property identifies which file or files should be transformed.
+                        b) The use property indicates which loader should be used to do the transforming.
+
+                      eg. module.exports = {
+                            output: {
+                              filename: 'my-first-webpack.bundle.js'
+                            },
+                            module: {
+                              rules: [
+                                { test: /\.txt$/, use: 'raw-loader' }
+                              ]
+                            }
+                          };
+
+          4.Plugins : While loaders are used to transform certain types of modules, plugins can be leveraged
+                      to perform a wider range of tasks like bundle optimization, asset management and injection of environment variables.
+
+                      eg. module.exports = {
+                          module: {
+                            rules: [
+                              { test: /\.txt$/, use: 'raw-loader' }
+                            ]
+                          },
+                          plugins: [
+                            new HtmlWebpackPlugin({template: './src/index.html'})
+                          ]
+                        };
+
+          5.Mode : By setting the mode parameter to either development, production or none, you can enable webpack's built-in optimizations
+                    that correspond to each environment. The default value is production.
+
+                    eg. module.exports = {
+                          mode: 'production/development/none'
+                        };
+
+          6.Browser Compatibility : webpack supports all browsers that are ES5-compliant (IE8 and below are not supported).
+                                    webpack needs Promise for import() and require.ensure(). If you want to support older browsers,
+                                    you will need to load a polyfill before using these expressions
+
+
+gulp-uglify
+
+
+https://developers.google.com/web/fundamentals
+
+HTML,CSS
+flex, grid
+html/html5 diff,
+display props,
+position props,
+z-index,
+flex box,
+css grids
+pseudo css,
+preprocessor,
+sass,scss
+vanilla js,
+jenkins
+
+performance
+Lighthouse
+Page Insight
+xss
+cors
+requestAnimationFrame
+
+
+
+
+NEW TOPICS
+
+responsive design vs adoptive design
+Web RTC (netflix)
+web socket(chat apps)
+CANVAS (games, stock apps, photo filters, photo editing)
+Open ID
+RBAC Layer
+Open graph(image card on link sharing)
+Pagination Vs Infinite scroll
+gRPC, protobuff
+API polling
+graphQL
+how to cache get api
+server sent events(crickbuzz, stock)
+Batch request
+QPM
+CDN
+Sentry
+Smooth animation
+
+Why web pages ask to accept all cookies(consent, better safety than sorry)
+GDPR
+MITM
+XSS
+CSRF
+clickjacking
+CSP
+CRP(critical rendering path)
+feature flag( to dynamically enable some features)
+long polling
