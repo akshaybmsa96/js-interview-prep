@@ -34,6 +34,25 @@ console.log("total sum", sum()(4)(5, 6, 8)(1, 2, 3, 4).done());
 
 console.log(sum(1, 1)(2, 5, 3, 2)(3, 4).done());
 
+//solution 3
+
+const sum = (...a) => {
+  const param1 = Array.from(a).reduce((a, c) => a + c, 0);
+  return function (...b) {
+    if (b.length) {
+      const param2 = Array.from(b).reduce((a, c) => a + c, 0);
+      return sum(param1 + param2);
+    } else {
+      return param1;
+    }
+  };
+};
+
+console.log(sum(1, 1)(2, 5, 3, 2)(3, 4)());
+
+//solution 4
+//without adding done at the end
+
 function sum(...args) {
   return Object.assign(sum.bind(null, ...args), {
     valueOf: () => args.reduce((a, c) => a + c, 0),
